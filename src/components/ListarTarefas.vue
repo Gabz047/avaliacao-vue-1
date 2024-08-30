@@ -3,6 +3,9 @@ defineProps({
     realizadas: {
         type: Boolean,
         default: false
+    },
+    tarefas: {
+        type: Array
     }
 })
 </script>

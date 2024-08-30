@@ -12,6 +12,19 @@ const tarefas = ref([
 ])
 const novaTarefa = ref('');
 
+const turma = [
+    '1',
+    '2',
+    '3'
+]
+
+const tarefasEmAberto = computed(() => tarefas.value.filter(tarefa => tarefa.feita == false).length)
+
+defineProps({
+    turmaNumber: {
+        type: Number
+    }
+})
 const tarefasFeitas = computed(() => tarefas.value.filter(tarefa => tarefa.feita).length);
 
 function adicionarTarefa() {
@@ -25,12 +38,16 @@ function finalizarTarefa(id) {
     tarefas.value[index].feita = true;
 }
 
+function reativarTarefa(id) {
+    tarefas.value[id - 1].feita = false
+}
+
 
 </script>
 <template>
     <section class="container">
-        <h1>Avaliação 2 INFO - {{ turma }}</h1>
-        <AdicionarTarefa class="card" v-model="novaTarefa" />
+        <h1>Avaliação 2 INFO - {{ turma[turmaNumber] }}</h1>
+        <AdicionarTarefa class="card" v-model="novaTarefa" @adicionarTarefa="adicionarTarefa()" />
         <section class="card tarefas-em-aberto">
             <h2>Tarefas em aberto ({{ tarefasEmAberto }})</h2>
             <ListarTarefas :tarefas="tarefas" @click="finalizarTarefa" />

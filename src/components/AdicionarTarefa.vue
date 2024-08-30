@@ -1,12 +1,18 @@
 <script setup>
-const model = defineModel()
+import {ref, reactive} from 'vue'
+const model = ref('')
+
+const emits = defineEmits([
+    'adicionarTarefa'
+])
+
 </script>
 
 <template>
     <section>
         <h2>Adicione uma nova tarefa</h2>
-        <input type="text" v-model="model" @keyup.enter="$emit('adicionarTarefa')" />
-        <button>Adicionar</button>
+        <input type="text" v-model="model" />
+        <button @click="emits('adicionarTarefa')">Adicionar</button>
     </section>
 </template>
 
